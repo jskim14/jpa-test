@@ -17,11 +17,10 @@ public class PersonService {
     public Person insertPerson(Person p) {
         Person person =  personRepository.save(p);
 
-        //여기다가 셋값을 넣으라고...
         return person;
     }
 
-    public Object selectPerson() {
+    public Object selectPerson(String id) {
         Iterable<Person> personList = personRepository.findAll();
         return personList;
     }

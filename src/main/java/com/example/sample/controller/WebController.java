@@ -1,50 +1,33 @@
 package com.example.sample.controller;
 
-import com.example.sample.model.entity.Person;
-import com.example.sample.repository.PersonRepository;
-import com.example.sample.service.PersonService;
+import com.example.sample.service.SanhaService;
+import com.example.sample.service.YanoljaService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/company")
 public class WebController {
 
-    private final PersonService service;
+    private final YanoljaService yanoljaService;
+    private final SanhaService sanhaService;
 
-    @GetMapping("/test")
-    public String test1() {
-        return "test";
-    }
-
-    @GetMapping("/gettest")
-    public Object select() {
-        Object personList = service.selectPerson();
-        return personList;
-    }
-
-    //insert
-    @PostMapping("/posttest")
-    //@RequestMapping("/posttest")
-    public String test2(@RequestBody Person p) {
-        System.out.println("컨트롤러의 p"+ p);
-        Person person = service.insertPerson(p);
-        if(person != null) {
-            System.out.println("등록이다");
+    @GetMapping("/select/{id}")
+    public Object select (@PathVariable(name = "id") String id) {
+        Object list=null;
+        if(id.equals("yanolja")) {
+            list = yanoljaService.select();
+            System.out.println("yanolja선택");
+        } else if(id.equals("sanha")) {
+            list = sanhaService.select();
         } else {
-            System.out.println("실패다");
+            String.valueOf(list);
+            list = "주소를 확인하세요";
         }
-//        Person person = pr.save(p);
-        System.out.println("save의 person"+p);
-        return "성공성공";
+        return list;
     }
-
-    @PutMapping("/puttest")
-    public String test3() {
-        return "test3";
-    }
-
-
 }
