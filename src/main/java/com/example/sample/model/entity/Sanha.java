@@ -1,9 +1,13 @@
 package com.example.sample.model.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "SANHA_COMPANY")
+@Getter @Setter
 public class Sanha {
 
     @Id

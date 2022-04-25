@@ -16,4 +16,9 @@ public class YanoljaService {
         Iterable<Yanolja> yanoljas = yanoljaRepository.findAll();
         return yanoljas;
     }
+
+    public Yanolja insert(Yanolja y) {
+        Yanolja yanolja = yanoljaRepository.save(y);
+        return yanolja;
+    }
 }

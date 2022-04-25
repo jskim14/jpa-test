@@ -16,7 +16,6 @@ public class PersonService {
 
     public Person insertPerson(Person p) {
         Person person =  personRepository.save(p);
-
         return person;
     }
 
