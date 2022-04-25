@@ -1,11 +1,9 @@
 package com.example.sample.controller;
 
 import com.example.sample.model.entity.Sanha;
-import com.example.sample.model.entity.Yanolja;
 import com.example.sample.service.SanhaService;
 import com.example.sample.service.YanoljaService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -32,11 +30,10 @@ public class WebController {
 
     @PostMapping("/insert/{id}")
     public Object insert (@PathVariable(name = "id") String id,
-                         // @RequestBody Yanolja yanolja,
                           @RequestBody Sanha sanha) {
         Object list = null;
         if(id.equals("yanolja")) {
-           // list = yanoljaService.insert(yanolja);
+ //           list = yanoljaService.insert(yanolja);
         } else if(id.equals("sanha")) {
             list = sanhaService.insert(sanha);
         } else {
@@ -52,7 +49,10 @@ public class WebController {
                          @RequestParam("param") Long param, Sanha sanha) {
         System.out.println("param = " + param);
         System.out.println("sanha = " + sanha);
-        Sanha updateSanha = sanhaService.update(param, sanha);
+        Sanha updateSanha = null;
+        if(id.equals("sanha")) {
+            updateSanha = sanhaService.update(param, sanha);
+        }
         return updateSanha;
     }
 
